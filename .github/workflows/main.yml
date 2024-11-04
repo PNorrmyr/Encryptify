@@ -31,7 +31,7 @@ jobs:
       - name: Set up Java for backend
         uses: actions/setup-java@v2
         with:
-          java-version: '17'  # Specify your desired Java version
+          java-version: '17'
           distribution: 'adopt'
 
       - name: Cache Maven dependencies

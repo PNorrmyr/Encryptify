@@ -54,7 +54,7 @@ class CrypterTest {
             crypter.encrypt(null);
         });
 
-        assertEquals("input cannot be null", thrown.getMessage());
+        assertEquals("Input cannot be null", thrown.getMessage());
     }
 
 

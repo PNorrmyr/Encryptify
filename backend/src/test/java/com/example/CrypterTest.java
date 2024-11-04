@@ -12,6 +12,7 @@ class CrypterTest {
     private Crypter crypter;
 
     @BeforeEach
+    @SuppressWarnings("unused")
     void setUp() throws NoSuchAlgorithmException{
         crypter = new Crypter();
     }

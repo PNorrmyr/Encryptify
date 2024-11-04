@@ -13,6 +13,14 @@ public class Crypter {
    public Crypter() throws NoSuchAlgorithmException {
    }
 
+   private void validateInput(String input){
+      if(input == null) {
+         throw new IllegalArgumentException("Input cannot be null");
+      } else if(input.length() > 20) {
+         throw new IllegalArgumentException("Max 20 characters are allowed");
+      }
+   }
+
    private SecretKey generateKey() throws NoSuchAlgorithmException {
       KeyGenerator keyGen = KeyGenerator.getInstance("AES");
       keyGen.init(128);
@@ -20,6 +28,7 @@ public class Crypter {
    }
 
    public String encrypt(String input) throws Exception {
+      validateInput(input);
       Cipher cipher = Cipher.getInstance("AES");
       cipher.init(1, this.secretKey);
       byte[] encryptedBytes = cipher.doFinal(input.getBytes());

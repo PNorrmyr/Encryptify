@@ -1,0 +1,58 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js for frontend
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Set up Java for backend
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'  # Specify your desired Java version
+          distribution: 'adopt'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          mvn install -DskipTests  # Skip tests during install to speed up the process
+
+      - name: Run backend tests
+        run: |
+          cd backend
+          mvn test  # Execute tests in the backend
+
+      - name: Build frontend application
+        run: |
+          cd frontend
+          npm run build  # Build the React app

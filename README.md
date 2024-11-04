@@ -1,4 +1,5 @@
-#Encryptify
+# Encryptify
+
 Application that encrypts and decrypts user text input using AES. Project to practise CI/CD, including automated testing and deployment.
 
 Figma board describing the flow

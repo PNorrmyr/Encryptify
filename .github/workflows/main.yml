@@ -56,3 +56,19 @@ jobs:
         run: |
           cd frontend
           npm run build  # Build the React app
+
+      - name: Install Cypress
+        run: |
+          cd frontend
+          npm install cypress --save-dev
+
+      - name: Start frontend server
+        run: |
+          cd frontend
+          npm start &
+
+      - name: Run Cypress components tests
+        run: |
+          cd frontend
+          npx cypress run --component
+

@@ -16,8 +16,8 @@ public class Crypter {
    private boolean validateInput(String input){
       if(input == null) {
          throw new IllegalArgumentException("Input cannot be null");
-      } else if(input.length() > 20) {
-         throw new IllegalArgumentException("Max 20 characters are allowed");
+      } else if(input.length() > 50) {
+         throw new IllegalArgumentException("Max 50 characters are allowed");
       }
       return true;
    }

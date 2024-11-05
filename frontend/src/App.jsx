@@ -5,7 +5,6 @@ import './App.css'
 import InputField from './InputField'
 import EncryptButton from './EncryptButton'
 import DecryptButton from './DecryptButton'
-
 function App() {
 
   return (

@@ -45,7 +45,7 @@ class CrypterTest {
             crypter.encrypt(inputString);
         }, "Input has to many characters");
 
-        assertEquals("Max 20 characters are allowed", thrown.getMessage());
+        assertEquals("Max 50 characters are allowed", thrown.getMessage());
     }
 
     

@@ -49,8 +49,9 @@ jobs:
 
       - name: Start backend server
         run: |
-          cd backend
-          mvn spring-boot:run
+            cd backend
+            mvn spring-boot:run -Dspring.profiles.active=test &
+            sleep 15
 
       - name: Run backend tests
         run: |

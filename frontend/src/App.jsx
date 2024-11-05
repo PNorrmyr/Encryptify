@@ -18,6 +18,9 @@ function App() {
       <DecryptButton encryptedText = { encryptedText } setDecryptedText = { setDecryptedText }/>
       <h3>Encrypted Text: </h3>
       <p>{encryptedText}</p>
+
+      <h3>Decrypted Text:</h3>
+      <p>{decryptedText}</p>
     </div>
   )
 }

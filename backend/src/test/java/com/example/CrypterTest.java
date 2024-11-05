@@ -54,7 +54,6 @@ class CrypterTest {
           IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
             crypter.encrypt(null);
         });
-
         assertEquals("Input cannot be null", thrown.getMessage());
     }
 

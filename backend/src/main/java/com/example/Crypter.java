@@ -13,12 +13,13 @@ public class Crypter {
    public Crypter() throws NoSuchAlgorithmException {
    }
 
-   private void validateInput(String input){
+   private boolean validateInput(String input){
       if(input == null) {
          throw new IllegalArgumentException("Input cannot be null");
       } else if(input.length() > 20) {
          throw new IllegalArgumentException("Max 20 characters are allowed");
       }
+      return true;
    }
 
    private SecretKey generateKey() throws NoSuchAlgorithmException {
@@ -28,10 +29,12 @@ public class Crypter {
    }
 
    public String encrypt(String input) throws Exception {
-      validateInput(input);
+      byte[] encryptedBytes = null;
+      if(validateInput(input)){
       Cipher cipher = Cipher.getInstance("AES");
       cipher.init(1, this.secretKey);
-      byte[] encryptedBytes = cipher.doFinal(input.getBytes());
+      encryptedBytes = cipher.doFinal(input.getBytes());
+      }
       return Base64.getEncoder().encodeToString(encryptedBytes);
    }
 

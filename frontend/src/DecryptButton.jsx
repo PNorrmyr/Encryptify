@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 
-function DecryptButton({ encryptedText, setDecryptedText, setError }) {
+function DecryptButton({ encryptedText, setDecryptedText, }) {
   const handleDecrypt = async () => {
     try {
       if (encryptedText.length > 100) {

@@ -9,18 +9,21 @@ function App() {
   const [inputText, setInputText] = useState('');
   const [encryptedText, setEncryptedText] = useState('');
   const [decryptedText, setDecryptedText] = useState('');
+  const [error, setError] = useState('');
 
   return (
     <div className='app'>
       <h1>Encrypter</h1>
       <InputField value = { inputText } onChange={(e) => setInputText(e.target.value)}/>
-      <EncryptButton inputText = { inputText } setEncryptedText = { setEncryptedText }/>
+      <EncryptButton inputText = { inputText } setEncryptedText = { setEncryptedText } setError = { setError }/>
       <DecryptButton encryptedText = { encryptedText } setDecryptedText = { setDecryptedText }/>
       <h3>Encrypted Text: </h3>
       <p>{encryptedText}</p>
 
       <h3>Decrypted Text:</h3>
       <p>{decryptedText}</p>
+
+      {error && <p className='error'> {error} </p>}
     </div>
   )
 }

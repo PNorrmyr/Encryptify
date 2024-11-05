@@ -39,13 +39,13 @@ class CrypterTest {
 
     @Test
     void encryptToManyCharacters() throws Exception {
-        String inputString = "This string is definitely more than twenty characters long";
+        String inputString = "This string is definitely more than one hundreed characters long, This string is definitely more than one hundreed characters long, This string is definitely more than one hundreed characters long";
 
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
             crypter.encrypt(inputString);
         }, "Input has to many characters");
 
-        assertEquals("Max 50 characters are allowed", thrown.getMessage());
+        assertEquals("Max 100 characters are allowed", thrown.getMessage());
     }
 
     

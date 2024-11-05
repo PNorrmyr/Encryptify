@@ -16,7 +16,7 @@ describe('<App />', () => {
       cy.mount(<App />);
       cy.get('.input-field').type('Encrypt this message');
       cy.get('.encrypt-btn').click();
-      cy.get('.encrypted-text').is('visible');
+      cy.get('.encrypted-text').should('be.visible');
     })
   })
 })

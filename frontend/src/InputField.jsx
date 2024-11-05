@@ -1,7 +1,8 @@
+import React from 'react';
 
-function InputField() {
+function InputField({ value, onChange }) {
   return (
-    <input type="text" className="input-field" placeholder="Type in text" />
+    <input type="text" value = { value } onChange = { onChange } className="input-field" placeholder="Type in text" />
   )
 }
 

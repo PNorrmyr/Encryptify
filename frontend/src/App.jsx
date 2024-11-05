@@ -6,12 +6,18 @@ import InputField from './InputField'
 import EncryptButton from './EncryptButton'
 import DecryptButton from './DecryptButton'
 function App() {
+  const [inputText, setInputText] = useState('');
+  const [encryptedText, setEncryptedText] = useState('');
+  const [decryptedText, setDecryptedText] = useState('');
 
   return (
-    <div>
-      <InputField />
-      <EncryptButton />
-      <DecryptButton />
+    <div className='app'>
+      <h1>Encrypter</h1>
+      <InputField value = { inputText } onChange={(e) => setInputText(e.target.value)}/>
+      <EncryptButton inputText = { inputText } setEncryptedText = { setEncryptedText }/>
+      <DecryptButton encryptedText = { encryptedText } setDecryptedText = { setDecryptedText }/>
+      <h3>Encrypted Text: </h3>
+      <p>{encryptedText}</p>
     </div>
   )
 }

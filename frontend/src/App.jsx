@@ -29,10 +29,10 @@ function App() {
       <DecryptButton encryptedText = { encryptedText } setDecryptedText = { setDecryptedText } setError={ setError }/>
 
       <h3>Encrypted Text: </h3>
-      <p>{encryptedText}</p>
+      <p className='encrypted-text'>{encryptedText}</p>
 
       <h3>Decrypted Text:</h3>
-      <p>{decryptedText}</p>
+      <p className='decrypted-text'>{decryptedText}</p>
 
       {error && <p className='error'> {error} </p>}
     </div>

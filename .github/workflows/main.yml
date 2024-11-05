@@ -47,6 +47,11 @@ jobs:
           cd backend
           mvn install -DskipTests  # Skip tests during install to speed up the process
 
+      - name: Start backend server
+        run: |
+          cd backend
+          mvn spring-boot:run
+
       - name: Run backend tests
         run: |
           cd backend

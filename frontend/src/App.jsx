@@ -18,6 +18,8 @@ function App() {
     } else {
       setError('');
       setInputText(value);
+      setDecryptedText('');
+      setEncryptedText('');
     }
   }
 
@@ -26,7 +28,7 @@ function App() {
       <h1>Encrypter</h1>
       <InputField value = { inputText } onChange={ handleInputChange } setError = { setError }/>
       <EncryptButton inputText = { inputText } setEncryptedText = { setEncryptedText } setError = { setError }/>
-      <DecryptButton encryptedText = { encryptedText } setDecryptedText = { setDecryptedText } setError={ setError }/>
+      <DecryptButton encryptedText = { encryptedText || inputText } setDecryptedText = { setDecryptedText } setError={ setError }/>
 
       <h3>Encrypted Text: </h3>
       <p className='encrypted-text'>{encryptedText}</p>

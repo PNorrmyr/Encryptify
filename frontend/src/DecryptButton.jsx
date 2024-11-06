@@ -5,8 +5,9 @@ import axios from 'axios';
 function DecryptButton({ encryptedText, setDecryptedText, setError }) {
   const handleDecrypt = async () => {
     try {
-      if (!encryptedText) {
-        throw new Error("No encrypted text to decrypt.");
+      if (!encryptedText || encryptedText.trim() === '') {
+        setError("Please enter text to decrypt.");
+        return;
       }
       const response = await axios.post('http://localhost:8080/api/crypter/v1/decrypt', encryptedText, {
         headers: {
@@ -16,7 +17,7 @@ function DecryptButton({ encryptedText, setDecryptedText, setError }) {
       setDecryptedText(response.data);
     } catch (error) {
       console.error("Error decrypting text:", error);
-      setError(error.response?.data?.message || error.message); 
+      setError(error.response?.data?.message || "Unable to decrypt the input. It may not be a valid encrypted text."); 
     }
   };
 

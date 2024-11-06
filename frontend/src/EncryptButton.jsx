@@ -4,8 +4,13 @@ import axios from 'axios';
 function EncryptButton({ inputText, setEncryptedText, setError }) {
   const handleEncrypt = async () => {
     try { 
+      if (!inputText || inputText.trim() === '') {
+        setError("Please enter text to encrypt.");
+        return;
+      }
       if (inputText.length > 100) {
-        throw new Error("Input text cannot be more than 100 characters.")
+        setError("Input text cannot be more than 100 characters.");
+        return;
       }
 
       const response = await axios.post('http://localhost:8080/api/crypter/v1/encrypt', inputText, {

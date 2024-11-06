@@ -22,6 +22,13 @@ public class Crypter {
       return true;
    }
 
+   private boolean validateDecryptInput(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException("Encrypted text cannot be null or empty");
+        }
+        return true;
+    }
+
    private SecretKey generateKey() throws NoSuchAlgorithmException {
       KeyGenerator keyGen = KeyGenerator.getInstance("AES");
       keyGen.init(128);
@@ -29,19 +36,22 @@ public class Crypter {
    }
 
    public String encrypt(String input) throws Exception {
-      byte[] encryptedBytes = null;
       if(validateInput(input)){
       Cipher cipher = Cipher.getInstance("AES");
       cipher.init(1, this.secretKey);
-      encryptedBytes = cipher.doFinal(input.getBytes());
-      }
+      byte[] encryptedBytes = cipher.doFinal(input.getBytes());
       return Base64.getEncoder().encodeToString(encryptedBytes);
+      }
+      return null;
    }
 
    public String decrypt(String encryptedText) throws Exception {
+      if(validateDecryptInput(encryptedText)) {
       Cipher cipher = Cipher.getInstance("AES");
       cipher.init(2, this.secretKey);
       byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
       return new String(decryptedBytes);
+      }
+      return null;
    }
 }

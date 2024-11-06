@@ -16,7 +16,7 @@ function EncryptButton({ inputText, setEncryptedText, setError }) {
             setEncryptedText(response.data);
     } catch (error) {
       console.log("Error encrypting text", error);
-      setError(error.response.data.message || error.message); 
+      setError(error.response?.data?.message || error.message); 
     }
   };
 

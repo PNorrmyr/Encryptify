@@ -27,4 +27,21 @@ describe('<App />', () => {
         .and('contain', testMessage);
     });
   })
+
+
+  describe('Error message when user types in more than 100 characters', () => {
+    it('Types in to many characters and fails to encrypt message', () => {
+      const testMessage = 'Test to type in over onehundreed characters to receive an error stating that the input text cannot be greater than 100 characters';
+
+      cy.get('.input-field').type(testMessage);
+      cy.get('.encrypt-btn').click();
+
+      cy.get('.decrypted-text').should('be.empty');
+      cy.get('.error').should('be.visible');
+      cy.get('.error').contains('Input text cannot be greater than 100 characters.');
+
+    })
+  })
+
+  //lägg till test med för mycket karaktärer och ingen sträng
 })

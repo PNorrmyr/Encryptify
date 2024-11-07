@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function EncryptButton({ inputText, setEncryptedText, setError }) {
   const handleEncrypt = async () => {
+
     try { 
       if (!inputText || inputText.trim() === '') {
         setError("Please enter text to encrypt.");
@@ -21,7 +22,14 @@ function EncryptButton({ inputText, setEncryptedText, setError }) {
             setEncryptedText(response.data);
     } catch (error) {
       console.log("Error encrypting text", error);
-      setError(error.response?.data?.message || error.message); 
+
+      if(error.response){
+        setError(error.response.data?.message || "Error occured on the server."); 
+      } else if(error.request){
+        setError("No response from server. Try again later.");
+      } else {
+        setError(error.message || "An unknown error occured.")
+      }
     }
   };
 

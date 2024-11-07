@@ -13,22 +13,28 @@ function App() {
   const handleInputChange = (e) => {
     const value = e.target.value;
     
+    setInputText(value);
     if (value.length > 100) {
-      setError('Input text cannot be greater than 100 characters.');
+      setError('Encryption is limited to 100 characters. You can still decrypt text longer than 100 characters.');
     } else {
       setError('');
-      setInputText(value);
       setDecryptedText('');
       setEncryptedText('');
     }
   }
 
+  const isOverLimit = inputText.length > 100;
+  console.log("Is over limit:", isOverLimit);
+
   return (
     <div className='app'>
       <h1>Encrypter</h1>
       <InputField value = { inputText } onChange={ handleInputChange } setError = { setError }/>
-      <EncryptButton inputText = { inputText } setEncryptedText = { setEncryptedText } setError = { setError }/>
-      <DecryptButton encryptedText = { encryptedText || inputText } setDecryptedText = { setDecryptedText } setError={ setError }/>
+      <EncryptButton inputText = { inputText } setEncryptedText = { setEncryptedText } 
+                     setError = { setError } isOverLimit = { isOverLimit }/>
+      <DecryptButton encryptedText = { encryptedText || inputText } 
+                     setDecryptedText = { setDecryptedText } setError={ setError }
+                     isOverLimit = { isOverLimit }/>
 
       <h3>Encrypted Text: </h3>
       <p className='encrypted-text'>{encryptedText}</p>

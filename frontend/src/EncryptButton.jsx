@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-function EncryptButton({ inputText, setEncryptedText, setError }) {
+function EncryptButton({ inputText, setEncryptedText, setError, isOverLimit }) {
   const handleEncrypt = async () => {
 
     try { 
@@ -34,7 +34,7 @@ function EncryptButton({ inputText, setEncryptedText, setError }) {
   };
 
   return (
-   <button className="encrypt-btn" onClick={ handleEncrypt }>Encrypt</button>
+   <button  className={`encrypt-btn ${isOverLimit ? 'btn-red' : 'btn-green'}`} onClick={ handleEncrypt } disabled = { isOverLimit }>Encrypt</button>
   )
 }
 

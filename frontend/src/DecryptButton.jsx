@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 
-function DecryptButton({ encryptedText, setDecryptedText, setError }) {
+function DecryptButton({ encryptedText, setDecryptedText, setError, isOverLimit }) {
   const handleDecrypt = async () => {
     try {
       if (!encryptedText || encryptedText.trim() === '' || encryptedText == null) {
@@ -28,7 +28,7 @@ function DecryptButton({ encryptedText, setDecryptedText, setError }) {
   };
 
   return (
-    <button className="decrypt-btn" onClick={ handleDecrypt }>Decrypt</button>
+    <button className='decrypt-btn btn-green' onClick={ handleDecrypt }>Decrypt</button>
   )
 }
 

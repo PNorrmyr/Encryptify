@@ -5,7 +5,7 @@ function EncryptButton({ inputText, setEncryptedText, setError }) {
   const handleEncrypt = async () => {
 
     try { 
-      if (!inputText || inputText.trim() === '') {
+      if (!inputText || inputText.trim() === '' || inputText == null) {
         setError("Please enter text to encrypt.");
         return;
       }

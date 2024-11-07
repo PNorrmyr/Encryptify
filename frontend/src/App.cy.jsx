@@ -43,5 +43,52 @@ describe('<App />', () => {
     })
   })
 
-  //lägg till test med för mycket karaktärer och ingen sträng
+  describe('Error message when empty string or whitespace is given', () => {
+    beforeEach(() => {
+      cy.get('.input-field').clear();
+    })
+
+    it('Gets error message when trying to encrypt empty string', () => {
+      cy.get('.encrypt-btn').click();
+
+      cy.get('.decrypted-text').should('be.empty');
+      cy.get('.error').should('be.visible');
+      cy.get('.error').contains('Please enter text to encrypt.');
+
+    })
+
+    it('Gets error message when trying to encrypt whitespace', () => {
+      const whitespace = " ";
+
+      cy.get('.input-field').type(whitespace);
+      cy.get('.encrypt-btn').click();
+
+      cy.get('.decrypted-text').should('be.empty');
+      cy.get('.error').should('be.visible');
+      cy.get('.error').contains('Please enter text to encrypt.');
+
+    })
+
+    it('Gets error message when trying to decrypt empty string', () => {
+      cy.get('.decrypt-btn').click();
+
+      cy.get('.encrypted-text').should('be.empty');
+      cy.get('.error').should('be.visible');
+      cy.get('.error').contains('Please enter text to decrypt.');
+
+    })
+
+    it('Gets error message when trying to decrypt whitespace', () => {
+      const whitespace = " ";
+
+      cy.get('.input-field').type(whitespace);
+      cy.get('.decrypt-btn').click();
+
+      cy.get('.encrypted-text').should('be.empty');
+      cy.get('.error').should('be.visible');
+      cy.get('.error').contains('Please enter text to decrypt.');
+
+    })
+  })
+
 })

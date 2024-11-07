@@ -5,7 +5,7 @@ import axios from 'axios';
 function DecryptButton({ encryptedText, setDecryptedText, setError }) {
   const handleDecrypt = async () => {
     try {
-      if (!encryptedText || encryptedText.trim() === '') {
+      if (!encryptedText || encryptedText.trim() === '' || encryptedText == null) {
         setError("Please enter text to decrypt.");
         return;
       }

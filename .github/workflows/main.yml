@@ -101,6 +101,10 @@ jobs:
           git config --global user.email "philip.norrmyr@gmail.com"
           git config --global user.name "PNorrmyr"
 
+      - name: Setup GitHub Authentication
+        run: |
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
       - name: Deploy to Github Pages
         run: |
           cd frontend

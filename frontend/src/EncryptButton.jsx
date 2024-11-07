@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
-function EncryptButton({ inputText, setEncryptedText, setError }) {
+function EncryptButton({ inputText, setEncryptedText, setError, isOverLimit }) {
   const handleEncrypt = async () => {
+
     try { 
-      if (!inputText || inputText.trim() === '') {
+      if (!inputText || inputText.trim() === '' || inputText == null) {
         setError("Please enter text to encrypt.");
         return;
       }
@@ -21,12 +22,19 @@ function EncryptButton({ inputText, setEncryptedText, setError }) {
             setEncryptedText(response.data);
     } catch (error) {
       console.log("Error encrypting text", error);
-      setError(error.response?.data?.message || error.message); 
+
+      if(error.response){
+        setError(error.response.data?.message || "Error occured on the server."); 
+      } else if(error.request){
+        setError("No response from server. Try again later.");
+      } else {
+        setError(error.message || "An unknown error occured.")
+      }
     }
   };
 
   return (
-   <button className="encrypt-btn" onClick={ handleEncrypt }>Encrypt</button>
+   <button  className={`encrypt-btn ${isOverLimit ? 'btn-red' : 'btn-green'}`} onClick={ handleEncrypt } disabled = { isOverLimit }>Encrypt</button>
   )
 }
 

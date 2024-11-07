@@ -2,10 +2,10 @@ import React from 'react';
 import axios from 'axios';
 
 
-function DecryptButton({ encryptedText, setDecryptedText, setError }) {
+function DecryptButton({ encryptedText, setDecryptedText, setError, isOverLimit }) {
   const handleDecrypt = async () => {
     try {
-      if (!encryptedText || encryptedText.trim() === '') {
+      if (!encryptedText || encryptedText.trim() === '' || encryptedText == null) {
         setError("Please enter text to decrypt.");
         return;
       }
@@ -17,12 +17,18 @@ function DecryptButton({ encryptedText, setDecryptedText, setError }) {
       setDecryptedText(response.data);
     } catch (error) {
       console.error("Error decrypting text:", error);
-      setError(error.response?.data?.message || "Unable to decrypt the input. It may not be a valid encrypted text."); 
+      if(error.response){
+        setError(error.response.data?.message || "Error occured on the server."); 
+      } else if(error.request){
+        setError("No response from server. Try again later.");
+      } else {
+        setError(error.message || "An unknown error occured.")
+      }
     }
   };
 
   return (
-    <button className="decrypt-btn" onClick={ handleDecrypt }>Decrypt</button>
+    <button className='decrypt-btn btn-green' onClick={ handleDecrypt }>Decrypt</button>
   )
 }
 

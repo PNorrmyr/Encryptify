@@ -45,7 +45,7 @@ jobs:
       - name: Install backend dependencies
         run: |
           cd backend
-          mvn install -DskipTests  # Skip tests during install to speed up the process
+          mvn install -DskipTests
 
       - name: Start backend server
         run: |
@@ -56,12 +56,12 @@ jobs:
       - name: Run backend tests
         run: |
           cd backend
-          mvn test  # Execute tests in the backend
+          mvn test 
 
       - name: Build frontend application
         run: |
           cd frontend
-          npm run build  # Build the React app
+          npm run build
 
       - name: Install Cypress
         run: |
@@ -78,3 +78,36 @@ jobs:
           cd frontend
           npx cypress run --component
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository for deployment
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js for deployment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Configure git user info
+        run : |
+          git config --global user.email "philip.norrmyr@gmail.com"
+          git config --global user.name "PNorrmyr"
+
+      - name: Setup GitHub Authentication
+        run: |
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+      - name: Deploy to Github Pages
+        run: |
+          cd frontend
+          npm run deploy
+
+          

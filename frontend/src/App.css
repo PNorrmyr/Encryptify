@@ -40,3 +40,24 @@
 .read-the-docs {
   color: #888;
 }
+
+.btn-red {
+  background-color: rgb(241, 47, 47);
+  color: white;
+}
+
+.btn-green {
+  background-color: rgb(34, 189, 34);
+  color: white;
+}
+
+button[disabled] {
+  opacity: .6;
+  cursor: not-allowed; 
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}

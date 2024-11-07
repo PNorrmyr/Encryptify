@@ -1,5 +1,6 @@
 import React from 'react'
 import App from './App'
+import { HttpStatusCode } from 'axios';
 
 describe('<App />', () => {
     beforeEach(() => {
@@ -90,5 +91,22 @@ describe('<App />', () => {
 
     })
   })
+
+  describe('Error handling when server returns an error response', () => {
+    it('Displays server error message when server returns 500', () => {
+      cy.intercept('POST', '**/api/crypter/v1/encrypt', {
+        statusCode: 500,
+        body: { message: 'Error occurred on the server.' },
+      }).as('encryptRequest');
+  
+      cy.get('.input-field').type('Test message');
+      cy.get('.encrypt-btn').click();
+
+      cy.wait('@encryptRequest');
+
+      cy.get('.error').should('be.visible');
+      cy.get('.error').contains('Error occurred on the server.');
+    });
+  });
 
 })

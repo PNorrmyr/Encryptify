@@ -17,7 +17,13 @@ function DecryptButton({ encryptedText, setDecryptedText, setError }) {
       setDecryptedText(response.data);
     } catch (error) {
       console.error("Error decrypting text:", error);
-      setError(error.response?.data?.message || "Unable to decrypt the input. It may not be a valid encrypted text."); 
+      if(error.response){
+        setError(error.response.data?.message || "Error occured on the server."); 
+      } else if(error.request){
+        setError("No response from server. Try again later.");
+      } else {
+        setError(error.message || "An unknown error occured.")
+      }
     }
   };
 

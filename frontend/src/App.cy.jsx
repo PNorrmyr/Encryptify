@@ -39,7 +39,7 @@ describe('<App />', () => {
 
       cy.get('.decrypted-text').should('be.empty');
       cy.get('.error').should('be.visible');
-      cy.get('.error').contains('Input text cannot be greater than 100 characters.');
+      cy.get('.error').contains('Encryption is limited to 100 characters. You can still decrypt text longer than 100 characters.');
 
     })
   })

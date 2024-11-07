@@ -109,4 +109,18 @@ describe('<App />', () => {
     });
   });
 
+  describe('Error handling when no response is received from server', () => {
+    it('Displays network error message when no response is received', () => {
+      cy.intercept('POST', '**/api/crypter/v1/encrypt', { forceNetworkError: true }).as('encryptRequest');
+  
+      cy.get('.input-field').type('Test message');
+      cy.get('.encrypt-btn').click();
+  
+      cy.wait('@encryptRequest');
+  
+      cy.get('.error').should('be.visible');
+      cy.get('.error').contains('No response from server. Try again later.');
+    });
+  });
+
 })

@@ -37,8 +37,6 @@ describe('<App />', () => {
       cy.get('.input-field').type(testMessage);
       cy.get('.encrypt-btn').should('be.disabled');
 
-      cy.get('.encrypt-btn').click();
-
       cy.get('.decrypted-text').should('be.empty');
       cy.get('.error').should('be.visible');
       cy.get('.error').contains('Input text cannot be greater than 100 characters.');

@@ -45,7 +45,7 @@ jobs:
       - name: Install backend dependencies
         run: |
           cd backend
-          mvn install -DskipTests  # Skip tests during install to speed up the process
+          mvn install -DskipTests
 
       - name: Start backend server
         run: |
@@ -56,12 +56,12 @@ jobs:
       - name: Run backend tests
         run: |
           cd backend
-          mvn test  # Execute tests in the backend
+          mvn test 
 
       - name: Build frontend application
         run: |
           cd frontend
-          npm run build  # Build the React app
+          npm run build
 
       - name: Install Cypress
         run: |

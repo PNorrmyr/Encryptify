@@ -99,7 +99,7 @@ jobs:
       - name: Configure git user info
         run : |
           git config --global user.email "philip.norrmyr@gmail.com"
-          git confit --global user.name "PNorrmyr"
+          git config --global user.name "PNorrmyr"
 
       - name: Deploy to Github Pages
         run: |

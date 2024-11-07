@@ -35,6 +35,8 @@ describe('<App />', () => {
       const testMessage = 'Test to type in over onehundreed characters to receive an error stating that the input text cannot be greater than 100 characters';
 
       cy.get('.input-field').type(testMessage);
+      cy.get('.encrypt-btn').should('be.disabled');
+
       cy.get('.encrypt-btn').click();
 
       cy.get('.decrypted-text').should('be.empty');

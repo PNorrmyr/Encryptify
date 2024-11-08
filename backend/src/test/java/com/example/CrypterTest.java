@@ -28,6 +28,36 @@ class CrypterTest {
     }
 
     @Test
+    void encryptAndDecryptSingleCharacter() throws Exception {
+        String inputString = "A";
+
+        String encryptedString = crypter.encrypt(inputString);
+        String decryptedString = crypter.decrypt(encryptedString);
+
+        assertEquals(inputString, decryptedString, "The decrypted string does not match the original single character.");
+    }
+
+    @Test
+    void encryptAndDecryptMaxLength() throws Exception {
+        String inputString = "A".repeat(100);
+
+        String encryptedString = crypter.encrypt(inputString);
+        String decryptedString = crypter.decrypt(encryptedString);
+
+        assertEquals(inputString, decryptedString, "The decrypted string does not match the original at max length.");
+    }
+
+    @Test
+    void encryptAndDecryptSpecialCharacters() throws Exception {
+        String inputString = "Hello ! @#$%^&*()";
+
+        String encryptedString = crypter.encrypt(inputString);
+        String decryptedString = crypter.decrypt(encryptedString);
+
+        assertEquals(inputString, decryptedString, "The decrypted string does not match the original with special characters.");
+    }
+
+    @Test
     void encryptEmptyString() throws Exception {
             String inputString = "";
             
@@ -39,7 +69,7 @@ class CrypterTest {
 
     @Test
     void encryptToManyCharacters() throws Exception {
-        String inputString = "This string is definitely more than one hundreed characters long, This string is definitely more than one hundreed characters long, This string is definitely more than one hundreed characters long";
+        String inputString = "B".repeat(101);
 
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
             crypter.encrypt(inputString);

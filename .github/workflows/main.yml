@@ -3,7 +3,6 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
       - dev
   pull_request:
     branches:
@@ -79,7 +78,8 @@ jobs:
           npx cypress run --component
 
   deploy:
-    needs: build
+    if: github.ref == 'refs/heads/main'
+    needs: build       
     runs-on: ubuntu-latest
 
     steps:
@@ -91,21 +91,21 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
+      - name: Install dependencies for deployment
         run: |
           cd frontend
           npm install
 
-      - name: Configure git user info
+      - name: Configure git user info for deployment
         run : |
           git config --global user.email "philip.norrmyr@gmail.com"
           git config --global user.name "PNorrmyr"
 
-      - name: Setup GitHub Authentication
+      - name: Setup GitHub Authentication for deployment 
         run: |
             git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-      - name: Deploy to Github Pages
+      - name: Deploy to Github Pages 
         run: |
           cd frontend
           npm run deploy
